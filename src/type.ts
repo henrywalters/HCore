@@ -3,7 +3,9 @@ export const FLOAT_REGEX = /^[0-9]*[.][0-9]+$/;
 export const SQL_DATE_REGEX = /^\d{4}[-]\d{2}[-]\d{2}$/
 export const SQL_TIME_REGEX = /^\d{2}[:]\d{2}$/
 export const SQL_DATETIME_REGEX = /^(\d{4}[-]\d{2}[-]\d{2})|(\d{2}[:]\d{2})$/
-export const DATE_REGEX = /^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/;
+export const DATE_REGEX = /^\d{1,2}[/]\d{1,2}[/]\d{4}$/
+export const TIME_REGEX = /^\d{1,2}[:]\d{2}$/
+export const DATETIME_REGEX = /^(\d{1,2}[/]\d{1,2}[/]\d{4})|(\d{1,2}[:]\d{2})$/
 
 // Class to determine more specific types from JS primitives and coerce them into the proper data type.
 export default class Type {
@@ -54,7 +56,16 @@ export default class Type {
         return SQL_DATETIME_REGEX.test(value);
     }
 
+    // Checks if a value is a date but not a number
     public static isDate(value: string) {
-        return !isNaN(Date.parse(value));
+        return DATE_REGEX.test(value);
+    }
+
+    public static isTime(value: string) {
+        return TIME_REGEX.test(value);
+    }
+
+    public static isDatetime(value: string) {
+        return DATETIME_REGEX.test(value);
     }
 }
