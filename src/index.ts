@@ -3,8 +3,10 @@ import EventListenerPool from './eventListenerPool';
 import { FileSystem } from './fileSystem';
 import Path from './path';
 import { Random } from './random';
+import { List } from './structures/list';
 import Tests from './tests';
 import Type from './type';
+import { HInt } from './types/hint';
 import WebUtils from './webUtils';
 
 export {HashMap} from './structures/hashMap';
@@ -16,14 +18,9 @@ const HCore = {
     EventListenerPool: EventListenerPool,
     Type: Type,
     Tests: Tests,
-}
-
-export const HCoreWeb = {
     WebUtils: WebUtils,
-}
-
-export const HCoreServer = {
     FileSystem: FileSystem,
+    List: List,
 }
 
 export default HCore;
