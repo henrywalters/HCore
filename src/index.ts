@@ -8,6 +8,8 @@ import Tests from './tests';
 import Type from './type';
 import { HInt } from './types/hint';
 import WebUtils from './webUtils';
+import * as fs from 'fs';
+import { FileStream } from './fileStream';
 
 export {HashMap} from './structures/hashMap';
 export {PathParameter, PathParameterMap} from './pathParameters';
@@ -20,6 +22,7 @@ const HCore = {
     Tests: Tests,
     WebUtils: WebUtils,
     FileSystem: FileSystem,
+    FileStream: FileStream,
     List: List,
 }
 
