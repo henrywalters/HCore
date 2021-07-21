@@ -4,6 +4,8 @@ export const SPECIAL_CHARACTERS = ['!', '@', '#', '$', '%', '^', '&', '*', '(', 
 
 export const AMBIGUOUS_CHARACTERS = ['0', 'o', 'l', '1'];
 
+export const ASCII_COLOR_CHARACTERS = ["@", "M", "B", "H", "E", "N", "R", "#", "K", "W", "X", "D", "F", "P", "Q", "A", "S", "U", "Z", "b", "d", "e", "h", "x", "*", "8", "G", "m", "&", "0", "4", "L", "O", "V", "Y", "k", "p", "q", "5", "T", "a", "g", "n", "s", "6", "9", "o", "w", "z", "$", "C", "I", "u", "2", "3", "J", "c", "f", "r", "y", "%", "1", "v", "7", "l", "+", "i", "t", "[", "]", " ", "{", "}", "?", "j", "|", "(", ")", "=", "~", "!", "-", "/", "<", ">", '"', "^", "_", "`", "'", ";", ",", ":", "."];
+
 export const PI = Math.PI;
 export const E = Math.E;
 export const SQRT_3 = Math.sqrt(3);

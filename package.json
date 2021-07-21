@@ -1,6 +1,6 @@
 {
   "name": "hcore",
-  "version": "1.0.23",
+  "version": "1.0.24",
   "description": "A TypeScript library of core elements to be used for different apps.",
   "main": "dist/index.js",
   "scripts": {
@@ -19,5 +19,8 @@
   },
   "types": [
     "node"
-  ]
+  ],
+  "dependencies": {
+    "jimp": "^0.16.1"
+  }
 }

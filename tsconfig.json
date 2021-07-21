@@ -4,6 +4,7 @@
 		"target": "es6",
 		"declaration": true,
 		"outDir": "./dist",
+		"esModuleInterop": true,
 		"lib": [
 			"es5", "es6", "dom", "dom.iterable"
 		]
