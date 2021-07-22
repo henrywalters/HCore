@@ -12,6 +12,7 @@ import * as fs from 'fs';
 import { FileStream } from './fileStream';
 import { Image } from './image';
 import { Vector } from './math/vector';
+import { Color } from './color';
 
 const { performance } = require('perf_hooks');
 
@@ -28,39 +29,9 @@ const HCore = {
     FileSystem: FileSystem,
     FileStream: FileStream,
     List: List,
+    Vector: Vector,
+    Color: Color,
+    Image: Image,
 }
-
-async function testImages() {
-    const t0 = performance.now();
-    const raw = await Image.FromFile("/home/henry/Pictures/woman.png");
-    const t1 = performance.now();
-    const ascii = raw.toAscii(10);
-    const t2 = performance.now();
-    console.log(new Vector(1 + 1, 1 + 2, 1 + 3, 1 + 4));
-    const t3 = performance.now();
-    console.log(`Image load: ${t1 - t0}`);
-    console.log(`Ascii conversion: ${t2 - t1}`);
-    console.log(`test ${t3 - t2}`)
-    console.log(ascii.map(x => x.map(y => y + y).join('')).join('\n'));
-    raw.downscale(10).toGrayscale();
-    raw.image.write("/home/henry/Pictures/woman_output.png");
-}
-
-let t0 = performance.now();
-
-(async () => {
-
-    const raw = await Image.FromFile("/home/henry/Pictures/simple.png");
-
-    for (let i = 0; i < 100; i++) {
-        const t1 = performance.now();
-        console.log(t1 - t0);
-        raw.toAscii(1);
-        t0 = t1;
-    }
-})()
-
-
-//testImages();
 
 export default HCore;
