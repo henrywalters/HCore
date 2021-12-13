@@ -1,20 +1,17 @@
-import { TIMEOUT } from 'dns';
 import EventListenerPool from './eventListenerPool';
 import { FileSystem } from './fileSystem';
 import Path from './path';
 import { Random } from './random';
 import { List } from './structures/list';
-import Tests from './tests';
+import Tests, { Test } from './tests';
 import Type from './type';
 import { HInt } from './types/hint';
 import WebUtils from './webUtils';
-import * as fs from 'fs';
 import { FileStream } from './fileStream';
 import { Image } from './image';
 import { Vector } from './math/vector';
 import { Color } from './color';
-
-const { performance } = require('perf_hooks');
+import { CaseType, Casing } from './casing';
 
 export {HashMap} from './structures/hashMap';
 export {PathParameter, PathParameterMap} from './pathParameters';
@@ -32,6 +29,9 @@ const HCore = {
     Vector: Vector,
     Color: Color,
     Image: Image,
+    Casing: Casing,
 }
+
+console.log(Casing.toType("velocityJump", CaseType.UpperCase));
 
 export default HCore;

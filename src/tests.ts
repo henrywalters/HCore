@@ -17,6 +17,7 @@ export default class Tests {
         for (let i = 0; i < tests.length; i++) {
             const test = tests[i];
             try {
+                console.log(`Test ${i+1} succeeded: ${test.test} matches ${test.against}`);
                 assert(test.test, test.against);
                 passed += 1;
             } catch (e) {
