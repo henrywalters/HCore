@@ -23,7 +23,7 @@ export class Casing {
         return input.slice(0, 1).toLocaleUpperCase() + input.slice(1, input.length).toLocaleLowerCase();
     }
 
-    private static convertWordToCaseTypeLetterType(input: string, sentenceIndex: number, caseType: CaseType) {
+    public static convertWordToLetterType(input: string, sentenceIndex: number, caseType: CaseType) {
         if (CASE_TYPE_SEPERATORS[caseType] !== '' && input.split(CASE_TYPE_SEPERATORS[caseType]).length !== 1) {
             throw new Error("Input must only be 1 word");
         }
@@ -106,7 +106,7 @@ export class Casing {
         const parts = Casing.split(input, type);
     
         for (let i = 0; i < parts.length; i++) {
-            parts[i] = Casing.convertWordToCaseTypeLetterType(parts[i], i, caseType);
+            parts[i] = Casing.convertWordToLetterType(parts[i], i, caseType);
         }
     
         return Casing.join(parts, caseType);

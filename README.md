@@ -68,7 +68,7 @@ function intersection(a, b) {
 ## Utilities
 
 ### Random
-`hcore/dist/random.ts` exposes the `Random` class which provides several static functions to generate random data.
+`hcore/dist/random` exposes the `Random` class which provides several static functions to generate random data.
 
 ```ts
 // Here are some examples
@@ -80,9 +80,9 @@ Random.alphanumeric(6) // "as3F9d"
 ```
 
 ### Path
-`hcore/dist/path.ts` exposes the `Path` class which provides a method of rigidly defining and using dynamic string paths. The motivation for this comes from developing powerful frontend api service wrappers as quickly as possible while maintaining a clean codebase.
+`hcore/dist/path` exposes the `Path` class which provides a method of rigidly defining and using dynamic string paths. The motivation for this comes from developing powerful frontend api service wrappers as quickly as possible while maintaining a clean codebase.
 
-`hcore/dist/pathParameters.ts` is a wrapper around the `HashMap` specifically designed for the `Path` class. This is exposed in `Path.params`.
+`hcore/dist/pathParameters` is a wrapper around the `HashMap` specifically designed for the `Path` class. This is exposed in `Path.params`.
 
 ```ts
 
@@ -97,7 +97,7 @@ assetDir.path // "assets/ntf.png"
 ```
 
 ### Type
-`hcore/dist/type.ts` exposes the `Type` class which provides several static methods to identify and coerce string values intro their proper type.
+`hcore/dist/type` exposes the `Type` class which provides several static methods to identify and coerce string values intro their proper type.
 
 ```ts
 // Here are some examples:
@@ -112,8 +112,49 @@ Type.isBoolean("true") // true
 Type.isSqlDate("2020-10-12") // true
 ```
 
+### Casing
+`hcore/dist/casing` exposes the Casing class which provides several static methods for identfying, and manipulating the case type of a string.
+
+The supported Case Typings:
+
+```ts
+export enum CaseType {
+    CapCase = 'CAP CASE',
+    UpperCase = 'Upper Case',
+    LowerCase = 'lower case',
+    SnakeCase = 'snake_case',
+    KebabCase = 'kebab-case',
+    CamelCase = 'camelCase',
+    PascalCase = 'PascalCase',
+}
+```
+
+To identify the type of string you're working with:
+
+```ts
+Casing.getType("HelloWorld") // CaseType.PascalCase
+Casing.getType("hello-world") // CaseType.KebabCase
+Casing.getType("hello-_world") // Throws error: Ambiguous casing
+```
+
+To split, join and convert case types, use:
+
+```ts
+Casing.split("HelloWorld", CaseType.PascalCase) // ["Hello", "World"]
+Casing.join(["Hello", "World"], CaseType.SnakeCase) // "Hello-World"
+Casing.toType("HelloWorld", CaseType.SnakeCase) // "hello-world"
+```
+
+You will notice that the split and join methods preserve casing. E.g. Splitting a
+string with Lower Case type will not cast the string to lower letter case. To do so, you can use this function to adjust the case to the proper type for each individual word. The method `toType` is is therefore recommended as it handles this cast for you.
+
+```ts
+Casing.convertWordToLetterType("hello", 0, CaseType.CamelCase) // hello (first word in sentence is not lower case)
+Casing.convertWordToLetterType("world", 1, CaseType.CamelCase) // World
+```
+
 ### Event Listener Pool
-`hcore/dist/eventListenerPool.ts` exposes the `EventListenerPool` class which provides a simple way to manage your own custom events.
+`hcore/dist/eventListenerPool` exposes the `EventListenerPool` class which provides a simple way to manage your own custom events.
 
 ```ts
 const pool = new EventListnerPool<number>();
