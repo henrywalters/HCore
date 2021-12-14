@@ -119,6 +119,7 @@ The supported Case Typings:
 
 ```ts
 export enum CaseType {
+    StdCase = 'Std case',
     CapCase = 'CAP CASE',
     UpperCase = 'Upper Case',
     LowerCase = 'lower case',

@@ -32,6 +32,6 @@ const HCore = {
     Casing: Casing,
 }
 
-console.log(Casing.toType("velocityJump", CaseType.UpperCase));
+console.log(Casing.toType("velocityJump", CaseType.StdCase));
 
 export default HCore;

@@ -1,4 +1,5 @@
 export enum CaseType {
+    StdCase = 'Std case',
     CapCase = 'CAP CASE',
     UpperCase = 'Upper Case',
     LowerCase = 'lower case',
@@ -9,6 +10,7 @@ export enum CaseType {
 }
 
 export const CASE_TYPE_SEPERATORS = {
+    [CaseType.StdCase]: ' ',
     [CaseType.CapCase]: ' ',
     [CaseType.UpperCase]: ' ',
     [CaseType.LowerCase]: ' ',
@@ -34,6 +36,8 @@ export class Casing {
             return Casing.toFirstLetterUpperCase(input);
         } else if (caseType === CaseType.CapCase) {
             return input.toLocaleUpperCase();
+        } else if (caseType === CaseType.StdCase) {
+            return sentenceIndex ===0 ? Casing.toFirstLetterUpperCase(input) : input.toLocaleLowerCase();
         } else {
             return input.toLocaleLowerCase();
         }
@@ -95,7 +99,18 @@ export class Casing {
         }
     
         if (seperator === ' ') {
-            return input.toLocaleUpperCase() === input ? CaseType.CapCase : (input.toLocaleLowerCase() === input ? CaseType.LowerCase : CaseType.UpperCase);
+
+            if (input.toLocaleUpperCase() === input) {
+                return CaseType.CapCase;
+            } else if (input.toLocaleLowerCase() === input) {
+                return CaseType.LowerCase;
+            } else {
+                if (input[0].toLocaleUpperCase() === input[0] && input.slice(1, input.length).toLocaleLowerCase() === input.slice(1, input.length)) {
+                    return CaseType.StdCase;
+                } else {
+                    return CaseType.UpperCase;
+                }
+            }
         }
     
         return seperator === '-' ? CaseType.KebabCase : CaseType.SnakeCase;
