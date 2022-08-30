@@ -12,13 +12,16 @@ export class StateMachine<V> {
     }
 
     public add(key: string, state: V) {
-        this.checkExists(key, "Already exists");
+        this.checkExists(key, "Already exists", false);
         
         this._states[key] = state;
         this._listeners[key] = new StateListener<V>();
+
+        return state;
     }
 
     public remove(key: string) {
+        this.checkExists(key, "Does not exist");
         if (this.exists(key)) {
             delete this._states[key];
             delete this._listeners[key];
@@ -62,8 +65,8 @@ export class StateMachine<V> {
     private _activeState?: string;
     private _listeners: { [key: string]: StateListener<V> } = {};
 
-    private checkExists(key: string, error: string) {
-        if (!this.states[key]) {
+    private checkExists(key: string, error: string, exists: boolean = true) {
+        if ((exists && !this.states[key]) || (!exists && !!this.states[key])) {
             throw new Error(`Error: ${error} on key: '${key}'`);
         }
     }
