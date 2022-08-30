@@ -166,3 +166,39 @@ pool.emit(3);
 // 3
 // 9
 ```
+
+### State Machine
+`hcore/dist/stateMachine` exposes the `StateMachine` class which provides a way of maintaining a set of named states that can be toggled on and off. Additionally, the event listener pool is hooked in for reactivity.
+
+```ts
+
+export type Algorithm = () => number[];
+
+const algorithms = new StateMachine<Algorithm>();
+
+algorithms.add("increment", () => [1, 2, 3, 4]);
+algorithms.add("decrement", () => [4, 3, 2, 1]);
+
+algorithms.onActivate("increment", (algo) => {
+    console.log("Incrementing");
+});
+
+algorithms.onDeactivate("increment", (algo) => {
+    console.log("Not Incrementing");
+});
+
+algorithms.onActivate("decrement", (algo) => {
+    console.log("Decrementing");
+});
+
+algorithms.onDeactivate("decrement", (algo) => {
+    console.log("Not Decrementing");
+});
+
+algorithms.activate("increment") // Incrementing
+algorithms.active() // [1, 2, 3, 4]
+algorithms.deactivate("increment") // Incrementing
+algorithms.activate("decrement") // Decrementing
+algorithms.activate("increment") // Not Decrementing, Incrementing
+
+```
