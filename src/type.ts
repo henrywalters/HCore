@@ -1,5 +1,5 @@
-export const INT_REGEX = /^\d+$/;
-export const FLOAT_REGEX = /^[0-9]*[.][0-9]+$/;
+export const INT_REGEX = /^-?\d+$/;
+export const FLOAT_REGEX = /(^-?0{1}[.][0-9]+$)|(^-?(?!0)\d*[.]\d+$)/;
 export const SQL_DATE_REGEX = /^\d{4}[-]\d{2}[-]\d{2}$/
 export const SQL_TIME_REGEX = /^\d{2}[:]\d{2}$/
 export const SQL_DATETIME_REGEX = /^(\d{4}[-]\d{2}[-]\d{2})|(\d{2}[:]\d{2})$/
