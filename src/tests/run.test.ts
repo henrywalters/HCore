@@ -1,9 +1,11 @@
 import {FloatTest, IntTest} from "./type.test";
+import {TreeTests} from "./tree.test";
 
 
 const tests = [
     IntTest,
     FloatTest,
+    TreeTests,
 ];
 
 let passed = true;

@@ -10,3 +10,5 @@ export const PI = Math.PI;
 export const E = Math.E;
 export const SQRT_3 = Math.sqrt(3);
 export const SQRT_2 = Math.SQRT2;
+
+export const SAFE_ID_SIZE = 32;
