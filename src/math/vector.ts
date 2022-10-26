@@ -1,5 +1,5 @@
 export class Vector {
-    public data: number[];
+    public _data: number[];
     public size: number;
 
     constructor(...data: number[]) {
@@ -19,11 +19,34 @@ export class Vector {
         return new Vector(...data);
     }
 
+    public copy(): Vector {
+        return new Vector(...this.data);
+    }
+
+    public set data(data: number[]) {
+        this._data = data;
+    }
+
+    public toString() {
+        return '<' + this.data.join(', ') + '>';
+    }
+
+    public get data(): number[] {
+        return this._data;
+    }
+
     public get x(): number {
         if (this.size < 1) {
             throw new Error("X only exists on vectors size > 1");
         }
         return this.data[0];
+    }
+
+    public set x(value: number) {
+        if (this.size < 1) {
+            throw new Error("X only exists on vectors size > 1");
+        }
+        this.data[0] = value;
     }
 
     public get y(): number {
@@ -33,11 +56,25 @@ export class Vector {
         return this.data[1];
     }
 
+    public set y(value: number) {
+        if (this.size < 1) {
+            throw new Error("X only exists on vectors size > 1");
+        }
+        this.data[1] = value;
+    }
+
     public get z(): number {
         if (this.size < 2) {
             throw new Error("Z only exists on vectors size > 1");
         }
         return this.data[2];
+    }
+
+    public set z(value: number) {
+        if (this.size < 2) {
+            throw new Error("X only exists on vectors size > 1");
+        }
+        this.data[2] = value;
     }
 
     // map creates a new vector with the mapFn
@@ -60,6 +97,20 @@ export class Vector {
     public add(vec: Vector) {
         for (let i = 0; i < Vector.MinSize(this, vec); i++) {
             this.data[i] += vec.data[i];
+        }
+        return this;
+    }
+
+    public sub(vec: Vector) {
+        for (let i = 0; i < Vector.MinSize(this, vec); i++) {
+            this.data[i] -= vec.data[i];
+        }
+        return this;
+    }
+
+    public scalar(scalar: number) {
+        for (let i = 0; i < this.size; i++) {
+            this.data[i] *= scalar;
         }
         return this;
     }
@@ -118,5 +169,35 @@ export class Vector {
             }
         }
         return max;
+    }
+
+    public static Add(a: Vector, b: Vector) {
+        const c = Vector.Zero(Vector.MaxSize(a, b));
+
+        for (let i = 0; i < Vector.MinSize(a, b); i++) {
+            c.data[i] = a.data[i] + b.data[i];
+        }
+
+        return c;
+    }
+
+    public static Scalar(a: Vector, m: number) {
+        const c = a.copy();
+        for (let i = 0; i < a.size; i++) {
+            c.data[i] *= m;
+        }
+        return c;
+    }
+
+    public static Sub(a: Vector, b: Vector) {
+        return Vector.Add(a, Vector.Scalar(b, -1));
+    }
+
+    public static Dot(a: Vector, b: Vector) {
+        let sum = 0;
+        for (let i = 0; i < Vector.MinSize(a, b); i++) {
+            sum += a.data[i] * b.data[i];
+        }
+        return sum;
     }
 }

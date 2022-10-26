@@ -25,6 +25,9 @@ export class StateMachine<V> {
         if (this.exists(key)) {
             delete this._states[key];
             delete this._listeners[key];
+            if (this._activeState === key) {
+                this._activeState = void 0;
+            }
         }
     }
 
@@ -32,14 +35,14 @@ export class StateMachine<V> {
         this.checkExists(key, "Does not exist");
         this.deactivate();
         this._activeState = key;
-        this._listeners[key].activate.emit(this.active);
+        this._listeners[key].activate.emit(this.active());
     }
 
     public deactivate() {
         if (!this._activeState) {
             return;
         }
-        this._listeners[this._activeState].deactivate.emit(this.active);
+        this._listeners[this._activeState].deactivate.emit(this.active());
     }
 
     public onActivate(key: string, handler: (state: V) => void) {
@@ -54,9 +57,16 @@ export class StateMachine<V> {
         return this._states;
     }
 
-    public get active() {
+    public active(): V {
         if (!this._activeState) { 
             throw new Error("No state is currently active");
+        }
+        return this._states[this._activeState];
+    }
+
+    public activeOrNone(): V | null {
+        if (!this._activeState) {
+            return null;
         }
         return this._states[this._activeState];
     }

@@ -2,12 +2,29 @@
 <html>
   <head>
         <meta charset="utf-8" />
-        <title>A demo - you better change me</title>
+        <title>HCore</title>
   </head>
   <body>
-        <h1>TypeScript Library Demo</h1>
-        <button id='helloworld'>Hello World</button>
+        <h1>HCore Demo</h1>
   </body>
+
+  <div style="border: 1px solid black; width: 100%; height: 800px">
+      <div style="padding: 1rem; height: 600px">
+          <h3>SVG Demo</h3>
+          <select id="path-type">
+              <option value="line">Line</option>
+              <option value="bezier">Bezier</option>
+          </select>
+          <input type="range" min="0" max="100" value="50" class="slider" id="w0">
+          <input type="range" min="0" max="100" value="50" class="slider" id="w1">
+          <input type="range" min="0" max="100" value="50" class="slider" id="w2">
+          <input type="range" min="0" max="100" value="50" class="slider" id="w3">
+
+          <svg width="100%" height="100%" id="svg" style="border: 1px solid black; margin-top: 1rem;"></svg>
+      </div>
+
+  </div>
+
   <footer>
         <script src="./index.js"></script>
         <style src='./index.css'></style>

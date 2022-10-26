@@ -1,11 +1,14 @@
 import {FloatTest, IntTest} from "./type.test";
 import {TreeTests} from "./tree.test";
-
+import {StateMachineTest} from "./stateMachine.test";
+import {VectorTests} from "./vector.test";
 
 const tests = [
     IntTest,
     FloatTest,
     TreeTests,
+    StateMachineTest,
+    VectorTests,
 ];
 
 let passed = true;

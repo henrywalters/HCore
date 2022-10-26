@@ -12,16 +12,18 @@ export const assertFn = (fn: (any) => any, check, against) => {
     }
 }
 
-export function test(test, against) {
+export function test(test, against, postHook = () => {}) {
     return {
         test,
         against,
+        postHook,
     }
 }
 
 export interface Test {
     test: any;
-    against :any;
+    against: any;
+    postHook: () => void;
 }
 
 
@@ -36,6 +38,7 @@ export default class Tests {
             try {
                 assert(test.test, test.against);
                 console.log("\x1b[32m", `Test ${i+1} succeeded: ${test.test} matches ${test.against}`);
+                test.postHook();
                 passed += 1;
             } catch (e) {
                 console.log("\x1b[31m", `Test ${i+1} failed: ${test.test} does not match ${test.against}`);
