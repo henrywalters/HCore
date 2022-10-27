@@ -23,6 +23,10 @@ export class H_Element {
         this.element.setAttribute(key, typeof value === 'number' ? value.toString() : value);
     }
 
+    public unsetAttribute(key: string) {
+        this.element.removeAttribute(key);
+    }
+
     public insert(child: H_Element) {
         this.element.appendChild(child.html);
     }

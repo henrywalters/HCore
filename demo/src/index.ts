@@ -24,6 +24,7 @@ const newPath = (parent: H_SVG): H_SVGPath => {
     if (pathType === H_SVGPathType.Bezier) {
         path.fancyBracket(weights);
     }
+    path.markerEnd = 'url(#arrow)';
     return path;
 }
 
@@ -32,7 +33,7 @@ let mousePos: Vector = Vector.Zero(2);
 const svg = new H_SVG(document.getElementById('svg'));
 const centerPoint = Vector.Scalar(svg.elementSize, 0.5);
 
-const indicatorCircle = new H_SVGCircle(5, mousePos);
+const indicatorCircle = new H_SVGCircle(0, mousePos);
 svg.insert(indicatorCircle );
 
 let pathIndicator: H_SVGPath = newPath(svg);
